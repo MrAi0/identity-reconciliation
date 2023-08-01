@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  dbserver:
     image: postgres
     restart: always
     environment:
@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=identity_reconciliation_db
     ports:
-      - "5432:5432"
+      - "5433:5432"
   node-app:
     restart: 'on-failure'
     build: .
@@ -17,5 +17,6 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://postgres:root@postgres:5432/identity_reconciliation_db?schema=public
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
     depends_on:
-      - postgres
+      - dbserver
