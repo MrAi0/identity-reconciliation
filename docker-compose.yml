@@ -16,7 +16,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=postgresql://postgres:root@postgres:5432/identity_reconciliation_db?schema=public
+      - DATABASE_URL=postgresql://postgres:root@dbserver:5432/identity_reconciliation_db?schema=public
       - NODE_TLS_REJECT_UNAUTHORIZED=0
     depends_on:
       - dbserver
